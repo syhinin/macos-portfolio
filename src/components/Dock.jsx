@@ -70,7 +70,7 @@ export const Dock = () => {
                             className="dock-icon"
                             aria-label={name}
                             data-tooltip-id="dock-tooltip"
-                            data-tooltip-name={name}
+                            data-tooltip-content={name}
                             data-tooltip-delay-show={150}
                             disabled={!canOpen}
                         // onClick={() => toggleApp({ id, canOpen })}
