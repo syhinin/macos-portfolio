@@ -1,10 +1,65 @@
 import { useRef } from "react";
 import { Tooltip } from "react-tooltip";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 import { DOCK_APPS } from "@constants";
 
 export const Dock = () => {
     const dockRef = useRef(null);
+
+    useGSAP(() => {
+        const dock = dockRef.current;
+        if (!dock) return;
+
+        const icons = dockRef.current?.querySelectorAll(".dock-icon");
+
+        const animateIcons = (mouseX) => {
+            const { left } = dock.getBoundingClientRect();
+
+            icons.forEach(icon => {
+                const { left: iconLeft, width } = icon.getBoundingClientRect();
+                const iconCenter = iconLeft - left + width / 2;
+                const distance = Math.abs(mouseX - iconCenter);
+
+                const intensity = Math.exp(-(distance ** 3) / 20000)
+
+                gsap.to(icon, {
+                    scale: 1 + 0.25 * intensity,
+                    y: -15 * intensity,
+                    duration: 0.2,
+                    ease: "power1.out",
+                })
+            });
+
+        }
+
+        const handleMouseMove = (e) => {
+            const { left } = dock.getBoundingClientRect();
+
+            animateIcons(e.clientX - left);
+        }
+
+        const handleMouseLeave = () => {
+            icons.forEach(icon => {
+                gsap.to(icon, {
+                    scale: 1,
+                    y: 0,
+                    duration: 0.2,
+                    ease: "power1.out",
+                })
+            })
+        }
+
+        dock.addEventListener("mousemove", handleMouseMove);
+        dock.addEventListener("mouseleave", handleMouseLeave);
+
+        return () => {
+            dock.removeEventListener("mousemove", handleMouseMove);
+            dock.removeEventListener("mouseleave", handleMouseLeave);
+        }
+    }, [])
+
     return (
         <section id="dock">
             <div className="dock-container" ref={dockRef}>
@@ -18,7 +73,7 @@ export const Dock = () => {
                             data-tooltip-name={name}
                             data-tooltip-delay-show={150}
                             disabled={!canOpen}
-                            onClick={() => toggleApp({ id, canOpen })}
+                        // onClick={() => toggleApp({ id, canOpen })}
                         >
                             <img src={`/images/${icon}`} loading="lazy" className={canOpen ? "" : "opacity-60"} alt={name} />
                         </button>
