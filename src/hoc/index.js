@@ -1,0 +1,1 @@
+export { withMacOSWindow } from "./withMacOSWindow";
