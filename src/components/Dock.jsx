@@ -4,9 +4,11 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 import { DOCK_APPS } from "@constants";
+import { useWindowStore } from "@store";
 
 export const Dock = () => {
     const dockRef = useRef(null);
+    const { openWindow, closeWindow, focusWindow, windows } = useWindowStore()
 
     useGSAP(() => {
         const dock = dockRef.current;
@@ -60,6 +62,23 @@ export const Dock = () => {
         }
     }, [])
 
+    const toggleApp = ({ id, canOpen }) => {
+        if (!canOpen) return;
+
+        const window = windows[id];
+
+        if (!window) {
+            console.error(`Window with id ${id} not found`);
+            return;
+        }
+
+        if (window?.isOpen) {
+            closeWindow(id);
+        } else {
+            openWindow(id);
+        }
+    }
+
     return (
         <section id="dock">
             <div className="dock-container" ref={dockRef}>
@@ -73,7 +92,7 @@ export const Dock = () => {
                             data-tooltip-content={name}
                             data-tooltip-delay-show={150}
                             disabled={!canOpen}
-                        // onClick={() => toggleApp({ id, canOpen })}
+                            onClick={() => toggleApp({ id, canOpen })}
                         >
                             <img src={`/images/${icon}`} loading="lazy" className={canOpen ? "" : "opacity-60"} alt={name} />
                         </button>
