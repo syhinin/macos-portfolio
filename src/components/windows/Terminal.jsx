@@ -34,7 +34,7 @@ const Terminal = () => {
                     ))}
                 </ul>
                 <div className="footnote">
-                    <p><Check size={20} /> 5 of 5 stacks loaded successfully (100%)</p>
+                    <p><Check size={20} /> {TECH_STACK.length} of {TECH_STACK.length} stacks loaded successfully (100%)</p>
                     <p className="text-black"><Flag size={15} fill="black" />Render tim: 4ms</p>
                 </div>
             </div>
