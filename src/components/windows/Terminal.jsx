@@ -1,20 +1,20 @@
-import { Check } from "lucide-react";
+import { Check, Flag } from "lucide-react";
 
 import { TECH_STACK } from "@constants";
+import { WindowControls } from "@components";
 import { withMacOSWindow } from "@hoc";
 
-console.log(TECH_STACK.length);
 const Terminal = () => {
     return (
         <>
             <div id="window-header">
-                <p>Window Controls</p>
+                <WindowControls target="terminal" />
                 <h2>Tech Stack</h2>
             </div>
             <div className="techstack">
                 <p>
-                    <span className="font-bold">@syhinin</span>
-                    show tech stack
+                    <span className="font-bold">@syhinin </span>
+                    % show tech stack
                 </p>
                 <div className="label">
                     <p className="w-32"> Category</p>
@@ -33,6 +33,10 @@ const Terminal = () => {
                         </li>
                     ))}
                 </ul>
+                <div className="footnote">
+                    <p><Check size={20} /> 5 of 5 stacks loaded successfully (100%)</p>
+                    <p className="text-black"><Flag size={15} fill="black" />Render tim: 4ms</p>
+                </div>
             </div>
         </>
     );
