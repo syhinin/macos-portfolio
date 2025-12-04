@@ -5,7 +5,7 @@ import {
   Navbar,
   Welcome,
   Dock,
-  TerminalWindow, SafariWindow, ResumeWindow, FinderWindow, TextWindow
+  TerminalWindow, SafariWindow, ResumeWindow, FinderWindow, TextWindow, ImageWindow
 } from "@components";
 
 gsap.registerPlugin(Draggable);
@@ -24,6 +24,7 @@ function App() {
       <ResumeWindow />
       <FinderWindow />
       <TextWindow />
+      <ImageWindow />
     </>
   );
 }

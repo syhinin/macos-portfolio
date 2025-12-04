@@ -5,61 +5,63 @@ import gsap from "gsap";
 
 import { useWindowStore } from "@store";
 
-
 export const withMacOSWindow = (Component, windowKey) => {
-    const Wrapped = (props) => {
-        const { focusWindow, windows } = useWindowStore()
-        const { isOpen, zIndex } = windows[windowKey]
+  const Wrapped = (props) => {
+    const { focusWindow, windows } = useWindowStore();
+    const { isOpen, zIndex } = windows[windowKey];
 
-        const ref = useRef(null);
+    const ref = useRef(null);
 
-        // Add open and close animation
-        useGSAP(() => {
-            const el = ref.current
+    // Add open and close animation
+    useGSAP(() => {
+      const el = ref.current;
 
-            if (!el || !isOpen) return;
+      if (!el || !isOpen) return;
 
-            el.style.display = "block"
+      el.style.display = "block";
 
-            gsap.fromTo(el, {
-                scale: 0.8,
-                opacity: 0,
-                y: 40,
-            }, { scale: 1, opacity: 1, y: 0, duration: 0.2, ease: "power3.out" })
-        }, [isOpen])
+      gsap.fromTo(
+        el,
+        {
+          scale: 0.8,
+          opacity: 0,
+          y: 40,
+        },
+        { scale: 1, opacity: 1, y: 0, duration: 0.2, ease: "power3.out" }
+      );
+    }, [isOpen]);
 
-        // Add Draggable effect 
-        useGSAP(() => {
-            const el = ref.current
+    // Add Draggable effect
+    useGSAP(() => {
+      const el = ref.current;
 
-            if (!el) return;
+      if (!el) return;
 
-            const [instance] = Draggable.create(el, {
-                onPress: () => focusWindow(windowKey),
-            })
+      const [instance] = Draggable.create(el, {
+        onPress: () => focusWindow(windowKey),
+      });
 
-            return () => instance.kill()
-        }, [])
+      return () => instance.kill();
+    }, []);
 
-        useLayoutEffect(() => {
-            const el = ref.current
+    useLayoutEffect(() => {
+      const el = ref.current;
 
-            if (!el) return;
+      if (!el) return;
 
-            el.style.display = isOpen ? "block" : "none"
+      el.style.display = isOpen ? "block" : "none";
+    }, [isOpen]);
 
-        }, [isOpen])
+    return (
+      <section id={windowKey} ref={ref} style={{ zIndex }} className="absolute">
+        <Component {...props} />
+      </section>
+    );
+  };
 
+  Wrapped.displayName = `withMacOSWindow(${
+    Component.displayName || Component.name || "Component"
+  })`;
 
-        return (
-            <section id={windowKey} ref={ref} style={{ zIndex }} className="absolute">
-                <Component {...props} />
-            </section>
-        )
-    }
-
-    Wrapped.displayName = `withMacOSWindow(${Component.displayName || Component.name || "Component"})`;
-
-    return Wrapped;
-}
-
+  return Wrapped;
+};
