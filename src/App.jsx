@@ -12,6 +12,7 @@ import {
   TextWindow,
   ImageWindow,
   ContactWindow,
+  Home,
 } from "@components";
 
 gsap.registerPlugin(Draggable);
@@ -30,6 +31,8 @@ function App() {
       <TextWindow />
       <ImageWindow />
       <ContactWindow />
+
+      <Home />
     </>
   );
 }
