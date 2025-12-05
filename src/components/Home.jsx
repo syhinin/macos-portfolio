@@ -18,13 +18,11 @@ export const Home = () => {
   };
 
   useGSAP(() => {
-    const [instance] = Draggable.create(".folder", {
+    const instances = Draggable.create(".folder", {
       bounds: containerRef.current,
     });
 
-
-
-    return () => instance.kill();
+    return () => instances.forEach((i) => i.kill());
   }, []);
   return (
     <section id="home">

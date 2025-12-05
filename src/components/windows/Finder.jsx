@@ -15,28 +15,17 @@ const Finder = () => {
 
   useGSAP(() => {
     const items = containerRef.current?.querySelectorAll(".finder-item");
+
     if (!items) return;
 
     const instances = Draggable.create(items, {
       bounds: containerRef.current,
-      onDragStart() {
-        this.target.dataset.isDragging = "true";
-      },
-      onDragEnd() {
-        // give click handler a tiny delay to avoid triggering open
-        setTimeout(() => {
-          this.target.dataset.isDragging = "false";
-        }, 50);
-      },
     });
 
-    return () => instances.forEach(i => i.kill());
+    return () => instances.forEach((i) => i.kill());
   }, [activeLocation.children]);
 
   const openItem = (item, e) => {
-    // Check if this specific element is being dragged
-    if (e.currentTarget.dataset.isDragging === "true") return;
-
     if (item.fileType === "pdf") return openWindow("resume");
     if (item.kind === "folder") return setActiveLocation(item);
     if (["fig", "url"].includes(item.fileType) && item.href)
@@ -62,16 +51,13 @@ const Finder = () => {
           {activeLocation.children.map((item) => (
             <li
               key={item.id}
-              draggable={true}
               className={`finder-item ${item.position}`}
               onClick={(e) => openItem(item, e)}
             >
               <img
                 src={item.icon}
-                draggable={false}
-                style={{ WebkitUserDrag: "none" }}
               />
-              <p draggable={false} style={{ WebkitUserDrag: "none" }}>{item.name}</p>
+              <p>{item.name}</p>
             </li>
           ))}
         </ul>

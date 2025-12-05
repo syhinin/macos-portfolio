@@ -32,9 +32,9 @@ export const withMacOSWindow = (Component, windowKey) => {
     // Add Draggable effect
     useGSAP(() => {
       const el = ref.current;
-      const header = el.querySelector("#window-header");
-
       if (!el) return;
+
+      const header = el.querySelector("#window-header");
 
       const [instance] = Draggable.create(el, {
         trigger: header,
