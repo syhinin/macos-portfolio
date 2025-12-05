@@ -1,4 +1,7 @@
+import { useRef } from "react";
 import { Search } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import { Draggable } from "gsap/Draggable";
 
 import { withMacOSWindow } from "@hoc";
 import { WindowControls, FoldersGroup } from "@components";
@@ -8,10 +11,21 @@ import { LOCATIONS } from "@constants";
 const Finder = () => {
   const { openWindow } = useWindowStore();
   const { activeLocation, setActiveLocation } = useLocationStore();
+  const containerRef = useRef(null);
 
-  const openItem = (item) => {
-    if (!item) return;
+  useGSAP(() => {
+    const items = containerRef.current?.querySelectorAll(".finder-item");
 
+    if (!items) return;
+
+    const instances = Draggable.create(items, {
+      bounds: containerRef.current,
+    });
+
+    return () => instances.forEach((i) => i.kill());
+  }, [activeLocation.children]);
+
+  const openItem = (item, e) => {
     if (item.fileType === "pdf") return openWindow("resume");
     if (item.kind === "folder") return setActiveLocation(item);
     if (["fig", "url"].includes(item.fileType) && item.href)
@@ -26,20 +40,23 @@ const Finder = () => {
         <WindowControls target="finder" />
         <Search className="icon" />
       </div>
+
       <div className="bg-white flex h-full">
         <div className="sidebar">
           <FoldersGroup name="Favorites" list={Object.values(LOCATIONS)} />
           <FoldersGroup name="My Projects" list={LOCATIONS.WORK.children} />
         </div>
 
-        <ul className="content">
+        <ul className="content" ref={containerRef}>
           {activeLocation.children.map((item) => (
             <li
               key={item.id}
-              className={item.position}
-              onClick={() => openItem(item)}
+              className={`finder-item ${item.position}`}
+              onClick={(e) => openItem(item, e)}
             >
-              <img src={item.icon} />
+              <img
+                src={item.icon}
+              />
               <p>{item.name}</p>
             </li>
           ))}
