@@ -32,10 +32,12 @@ export const withMacOSWindow = (Component, windowKey) => {
     // Add Draggable effect
     useGSAP(() => {
       const el = ref.current;
+      const header = el.querySelector("#window-header");
 
       if (!el) return;
 
       const [instance] = Draggable.create(el, {
+        trigger: header,
         onPress: () => focusWindow(windowKey),
       });
 
@@ -57,9 +59,8 @@ export const withMacOSWindow = (Component, windowKey) => {
     );
   };
 
-  Wrapped.displayName = `withMacOSWindow(${
-    Component.displayName || Component.name || "Component"
-  })`;
+  Wrapped.displayName = `withMacOSWindow(${Component.displayName || Component.name || "Component"
+    })`;
 
   return Wrapped;
 };
