@@ -10,4 +10,5 @@ export {
   FinderWindow,
   TextWindow,
   ImageWindow,
+  ContactWindow,
 } from "./windows";

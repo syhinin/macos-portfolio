@@ -11,6 +11,7 @@ import {
   FinderWindow,
   TextWindow,
   ImageWindow,
+  ContactWindow,
 } from "@components";
 
 gsap.registerPlugin(Draggable);
@@ -28,6 +29,7 @@ function App() {
       <FinderWindow />
       <TextWindow />
       <ImageWindow />
+      <ContactWindow />
     </>
   );
 }
