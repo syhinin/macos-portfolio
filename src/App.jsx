@@ -5,14 +5,17 @@ import {
   Navbar,
   Welcome,
   Dock,
-  TerminalWindow, SafariWindow
+  TerminalWindow,
+  SafariWindow,
+  ResumeWindow,
+  FinderWindow,
+  TextWindow,
+  ImageWindow,
 } from "@components";
 
 gsap.registerPlugin(Draggable);
 
 function App() {
-
-
   return (
     <>
       <Navbar />
@@ -21,6 +24,10 @@ function App() {
 
       <TerminalWindow />
       <SafariWindow />
+      <ResumeWindow />
+      <FinderWindow />
+      <TextWindow />
+      <ImageWindow />
     </>
   );
 }
