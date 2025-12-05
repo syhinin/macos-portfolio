@@ -34,7 +34,7 @@ const Contact = () => {
           {SOCIALS.map(({ id, bg, link, icon, text }) => (
             <li key={id} style={{ backgroundColor: bg }}>
               <a
-                href={text === "Gmail" ? `mailto:${link}` : link}
+                href={link}
                 target="_blank"
                 rel="noopener noreferrer"
                 title={text}
