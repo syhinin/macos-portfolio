@@ -8,8 +8,6 @@ const Image = () => {
 
   if (!data) return null;
 
-  console.log("Rendering ImageWindow with data:", data);
-
   return (
     <>
       <div id="window-header">

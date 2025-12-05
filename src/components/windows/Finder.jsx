@@ -1,5 +1,4 @@
 import { Search } from "lucide-react";
-// import clsx from "clsx";
 
 import { withMacOSWindow } from "@hoc";
 import { WindowControls, FoldersGroup } from "@components";
@@ -11,6 +10,8 @@ const Finder = () => {
   const { activeLocation, setActiveLocation } = useLocationStore();
 
   const openItem = (item) => {
+    if (!item) return;
+
     if (item.fileType === "pdf") return openWindow("resume");
     if (item.kind === "folder") return setActiveLocation(item);
     if (["fig", "url"].includes(item.fileType) && item.href)

@@ -7,7 +7,7 @@ export const Navbar = () => {
   const { openWindow } = useWindowStore();
   return (
     <nav className="">
-      <div >
+      <div>
         <img src="/images/logo.svg" alt="Logo" />
         <p className="font-bold">My Portfolio</p>
         <ul>

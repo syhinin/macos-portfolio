@@ -18,8 +18,6 @@ export const withMacOSWindow = (Component, windowKey) => {
 
       if (!el || !isOpen) return;
 
-      el.style.display = "block";
-
       gsap.fromTo(
         el,
         {

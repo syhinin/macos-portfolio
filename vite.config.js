@@ -17,4 +17,7 @@ export default defineConfig({
       "@windows": resolve(__dirname, "src/windows"),
     },
   },
+  optimizeDeps: {
+    include: ["pdfjs-dist"],
+  },
 });
