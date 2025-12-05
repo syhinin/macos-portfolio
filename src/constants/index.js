@@ -129,24 +129,24 @@ const TECH_STACK = [
 const SOCIALS = [
   {
     id: 1,
+    text: "LinkedIn",
+    icon: "/icons/linkedin.svg",
+    bg: "#05b6f6",
+    link: "https://www.linkedin.com/",
+  },
+  {
+    id: 2,
     text: "Github",
     icon: "/icons/github.svg",
     bg: "#f4656b",
     link: "https://github.com/",
   },
   {
-    id: 2,
-    text: "Platform",
+    id: 3,
+    text: "Website",
     icon: "/icons/atom.svg",
     bg: "#4bcb63",
     link: "https://syhinin.com/",
-  },
-  {
-    id: 3,
-    text: "LinkedIn",
-    icon: "/icons/linkedin.svg",
-    bg: "#05b6f6",
-    link: "https://www.linkedin.com/",
   },
 ];
 

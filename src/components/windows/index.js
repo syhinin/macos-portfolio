@@ -4,3 +4,4 @@ export { ResumeWindow } from "./Resume";
 export { FinderWindow } from "./Finder";
 export { TextWindow } from "./Text";
 export { ImageWindow } from "./Image";
+export { ContactWindow } from "./Contact";
