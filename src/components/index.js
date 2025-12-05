@@ -12,4 +12,5 @@ export {
   TextWindow,
   ImageWindow,
   ContactWindow,
+  PhotosWindow
 } from "./windows";

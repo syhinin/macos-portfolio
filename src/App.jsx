@@ -12,6 +12,7 @@ import {
   TextWindow,
   ImageWindow,
   ContactWindow,
+  PhotosWindow,
   Home,
 } from "@components";
 
@@ -31,6 +32,7 @@ function App() {
       <TextWindow />
       <ImageWindow />
       <ContactWindow />
+      <PhotosWindow />
 
       <Home />
     </>
